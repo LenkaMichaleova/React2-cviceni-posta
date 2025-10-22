@@ -1,4 +1,10 @@
-import type { EmailContact, EmailInbox, EmailMessage } from './email'
+import { 
+  getUnread, 
+  type EmailContact, 
+  type EmailInbox, 
+  type EmailInbox2, 
+  type EmailMessage
+} from './email'
 import './style.css'
 
 console.log('Pošta')
@@ -8,7 +14,7 @@ const contact : EmailContact = {
   email: 'pepa@example.com'
 }
 
-const message : EmailMessage = {
+const message1 : EmailMessage = {
   id: '1',
   from: contact,
   to: [{
@@ -31,11 +37,34 @@ const message : EmailMessage = {
   isRead: false
 }
 
+const message2 : EmailMessage = {
+  id: '2',
+  from: contact,
+  to: [{
+    name: 'Zdena',
+    email: 'zdena@example.com'
+  }],
+  cc: [{
+    name: 'Pepa',
+    email: 'pepa@example.com'
+  }],
+  bcc: [{
+  name: 'Karel',
+  email: 'karel@example.com'
+  }],
+  subject: 'Ahoj',
+  body: 'Jak se máš?',
+  priority: 'normal',
+  attachments: [],
+  sentAt: new Date(),
+  isRead: true
+}
+
 const inbox : EmailInbox[] = [
   {
     title: 'Osobní',
     owner: contact,
-    messages: [message]
+    messages: [message1, message2]
   },
   {
     title: 'Práce',
@@ -63,6 +92,14 @@ const inbox : EmailInbox[] = [
   } 
 ]
 
+const inbox2 : EmailInbox2 = {messages: [message1, message2 ]};
+
+// console.log('pred: ', inbox2)
+
+const notReadMessages = getUnread(inbox2)
+console.log('pred: ', inbox2)
+console.log('nepřečtené zprávy: ', notReadMessages)
+
 console.log(contact)
-console.log(message)
+console.log(message1, message2)
 console.log(inbox)

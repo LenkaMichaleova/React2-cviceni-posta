@@ -1,3 +1,4 @@
+//TYPY PROMĚNNÝCH PRO POŠTU
 export interface EmailContact {
     name: string;
     email: string;
@@ -23,6 +24,12 @@ export interface EmailInbox {
     messages: string[] | EmailMessage[];
 }[]
 
+// export type EmailInbox2 = EmailMessage[]
+export interface EmailInbox2 {
+    messages: EmailMessage[]
+}
+
+
 export interface EmailAttachment {
     filename: string;
     size: number; // in bytes
@@ -33,3 +40,15 @@ export interface EmailAttachment {
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document' | // DOCX
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'; // XLSX
 }
+
+
+// TYPY FUNKCÍ PRO POŠTU
+
+export function getUnread (inbox: EmailInbox2) : EmailMessage[] {
+    return (
+        inbox.messages.filter(msg => msg.isRead === false)
+    );
+}
+
+
+
