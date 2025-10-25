@@ -5,7 +5,7 @@ export interface EmailContact {
 }
 
 export interface EmailMessage {
-    id: string;
+    id: number;
     from: EmailContact;
     to: EmailContact[];
     cc?: EmailContact[];
@@ -24,10 +24,7 @@ export interface EmailInbox {
     messages: string[] | EmailMessage[];
 }[]
 
-// export type EmailInbox2 = EmailMessage[]
-export interface EmailInbox2 {
-    messages: EmailMessage[]
-}
+export type EmailInbox2 = EmailMessage[];
 
 
 export interface EmailAttachment {
@@ -46,9 +43,12 @@ export interface EmailAttachment {
 
 export function getUnread (inbox: EmailInbox2) : EmailMessage[] {
     return (
-        inbox.messages.filter(msg => msg.isRead === false)
+        inbox.filter(msg => msg.isRead === false)
     );
 }
 
-
-
+export function markAsRead (inbox: EmailInbox2, messageId: number) : EmailInbox2 {
+    return(
+        inbox.map((msg) => msg.id === messageId ? { ...msg, isRead: true } : msg )
+    )
+}

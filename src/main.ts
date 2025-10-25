@@ -1,5 +1,6 @@
 import { 
   getUnread, 
+  markAsRead,
   type EmailContact, 
   type EmailInbox, 
   type EmailInbox2, 
@@ -15,7 +16,7 @@ const contact : EmailContact = {
 }
 
 const message1 : EmailMessage = {
-  id: '1',
+  id: 1,
   from: contact,
   to: [{
     name: 'Alena',
@@ -38,7 +39,7 @@ const message1 : EmailMessage = {
 }
 
 const message2 : EmailMessage = {
-  id: '2',
+  id: 2,
   from: contact,
   to: [{
     name: 'Zdena',
@@ -92,14 +93,15 @@ const inbox : EmailInbox[] = [
   } 
 ]
 
-const inbox2 : EmailInbox2 = {messages: [message1, message2 ]};
-
-// console.log('pred: ', inbox2)
-
-const notReadMessages = getUnread(inbox2)
-console.log('pred: ', inbox2)
-console.log('nepřečtené zprávy: ', notReadMessages)
-
 console.log(contact)
 console.log(message1, message2)
 console.log(inbox)
+
+const inbox2 : EmailInbox2 = [message1, message2];
+console.log('puvodni schranka: ', inbox2)
+
+const notReadMessages = getUnread(inbox2)
+console.log('nepřečtené zprávy: ', notReadMessages)
+
+const updatedInbox = markAsRead(inbox2, 1);
+console.log('změna první zprávy na přečteno: ', updatedInbox);
