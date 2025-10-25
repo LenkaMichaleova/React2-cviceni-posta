@@ -26,7 +26,6 @@ export interface EmailInbox {
 
 export type EmailInbox2 = EmailMessage[];
 
-
 export interface EmailAttachment {
     filename: string;
     size: number; // in bytes
@@ -47,7 +46,7 @@ export function getUnread (inbox: EmailInbox2) : EmailMessage[] {
 }
 
 export function markAsRead (inbox: EmailInbox2, messageId: number) : EmailInbox2 {
-    return(
+    return (
         inbox.map((msg) => msg.id === messageId ? { ...msg, isRead: true } : msg )
     )
 }

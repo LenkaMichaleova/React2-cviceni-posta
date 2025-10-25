@@ -120,9 +120,9 @@ const inbox : EmailInbox[] = [
   } 
 ]
 
-console.log(contact)
-console.log(message1, message2, message3)
-console.log(inbox)
+console.log('kontakt: ', contact);
+console.log('zprávy: ', message1, message2, message3);
+console.log('schránka: ', inbox);
 
 const inbox2 : EmailInbox2 = [message1, message2, message3];
 console.log('puvodni schranka: ', inbox2)
@@ -133,6 +133,6 @@ console.log('nepřečtené zprávy: ', notReadMessages)
 const updatedInbox = markAsRead(inbox2, 1);
 console.log('změna první zprávy na přečteno: ', updatedInbox);
 
-const emailsFromPepa = findBySender(inbox2, "pepa@example.com");
+const emailsFromPepa = findBySender(inbox2, 'pepa@example.com');
 console.log('zprávy od Pepy: ', emailsFromPepa);
-console.log('zprávy od Lenky: ', findBySender(inbox2, "lenka@example.com"));
+console.log('zprávy od Lenky: ', findBySender(inbox2, 'lenka@example.com'));
