@@ -39,8 +39,7 @@ export interface EmailAttachment {
 }
 
 
-// TYPY FUNKCÍ PRO POŠTU
-
+// FUNKCE PRO POŠTU
 export function getUnread (inbox: EmailInbox2) : EmailMessage[] {
     return (
         inbox.filter(msg => msg.isRead === false)
@@ -51,4 +50,10 @@ export function markAsRead (inbox: EmailInbox2, messageId: number) : EmailInbox2
     return(
         inbox.map((msg) => msg.id === messageId ? { ...msg, isRead: true } : msg )
     )
+}
+
+export function findBySender (inbox: EmailInbox2, emailAddress: string) : EmailMessage[] {
+    return ( 
+        inbox.filter((msg) => msg.from.email === emailAddress) 
+    );
 }

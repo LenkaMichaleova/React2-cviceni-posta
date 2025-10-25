@@ -1,4 +1,5 @@
 import { 
+  findBySender,
   getUnread, 
   markAsRead,
   type EmailContact, 
@@ -61,6 +62,32 @@ const message2 : EmailMessage = {
   isRead: true
 }
 
+const message3 : EmailMessage = {
+  id: 3,
+  from: {
+    name: 'Lenka',
+    email: 'lenka@example.com'
+  },
+  to: [{
+    name: 'Jana',
+    email: 'jana@example.com'
+  }],
+  cc: [{
+    name: 'Pepa',
+    email: 'pepa@example.com'
+  }],
+  bcc: [{
+    name: 'Karel',
+    email: 'karel@example.com'
+  }],
+  subject: 'Ahoj',
+  body: 'Jak se máš?',
+  priority: 'normal',
+  attachments: [],
+  sentAt: new Date(),
+  isRead: false
+}
+
 const inbox : EmailInbox[] = [
   {
     title: 'Osobní',
@@ -94,14 +121,18 @@ const inbox : EmailInbox[] = [
 ]
 
 console.log(contact)
-console.log(message1, message2)
+console.log(message1, message2, message3)
 console.log(inbox)
 
-const inbox2 : EmailInbox2 = [message1, message2];
+const inbox2 : EmailInbox2 = [message1, message2, message3];
 console.log('puvodni schranka: ', inbox2)
 
-const notReadMessages = getUnread(inbox2)
+const notReadMessages = getUnread(inbox2);
 console.log('nepřečtené zprávy: ', notReadMessages)
 
 const updatedInbox = markAsRead(inbox2, 1);
 console.log('změna první zprávy na přečteno: ', updatedInbox);
+
+const emailsFromPepa = findBySender(inbox2, "pepa@example.com");
+console.log('zprávy od Pepy: ', emailsFromPepa);
+console.log('zprávy od Lenky: ', findBySender(inbox2, "lenka@example.com"));
